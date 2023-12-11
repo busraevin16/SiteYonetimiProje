@@ -272,7 +272,7 @@
             <!-- Giriş Formu -->
             <form action="GirisServlet" method="post">
                 <h1> SİTE SAKİNİ GİRİŞİ </h1>
-                <input type="text" placeholder="Daire No" name="daireno" />
+                <input type="text" placeholder="Villa No" name="daireno" />
                 <input type="email" placeholder="Email" name="email" />
                 <input type="password" placeholder="Şifre" name="password"/>
                 <a href="#">Şifreni mi unuttun?</a>
@@ -285,7 +285,7 @@
             <!-- Giriş Formu -->
          <form action="veritabanı.GirisServlet" method="post">
                 <h1> YÖNETİCİ GİRİŞİ </h1>
-                <input type="text" placeholder="Daire No" name="daireno" />
+                <input type="text" placeholder="Villa No" name="daireno" />
                 <input type="email" placeholder="Email" name="email" />
                 <input type="password" placeholder="Şifre" name="password"/>
                 <a href="#">Şifreni mi unuttun?</a>
