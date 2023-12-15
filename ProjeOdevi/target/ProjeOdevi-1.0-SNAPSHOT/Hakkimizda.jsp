@@ -63,17 +63,44 @@
                                                     <h1 id="colorlib-logo"><a href="index.html">Balay</a></h1>
                                                     <nav id="colorlib-main-menu" role="navigation">
                                                         <ul>
-                                                            <li class="colorlib-active"><a href="AnaSayfa.jsp">Ana Sayfa</a></li>
+                                                            <li ><a href="AnaSayfa.jsp">Ana Sayfa</a></li>
                                                             <li><a href="VillariCekServletSayfada">VİLLALAR</a></li>
-                                                            <li><a href="Hakkimizda.jsp">HAKKIMIZDA</a></li>
+                                                            <li class="colorlib-active"><a href="Hakkimizda.jsp">HAKKIMIZDA</a></li>
                                                             <li><a href="Iletisim.jsp">İLETİŞİM</a></li>
                                                         </ul>
                                                     </nav>
 
                                                     <div class="colorlib-footer">
-                                                        <p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> Distributed by: <a href="https://themewagon.com/" target="_blank">ThemeWagon</a>
-                                                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span> <span>Demo Images: <a href="http://nothingtochance.co/" target="_blank">nothingtochance.co</a></span></small></p>
+                                                        <p>
+
+                                                            <%
+                                                                // Kullanıcı bilgilerini session'dan çek
+                                                                Integer kullaniciDaireNo = (Integer) session.getAttribute("kullaniciDaireNo");
+                                                                String kullaniciEmail = (String) session.getAttribute("kullaniciEmail");
+                                                                String telefon = (String) session.getAttribute("kullaniciTelefon");
+                                                                String fullname = (String) session.getAttribute("kullaniciFullname");
+                                                                String rol = (String) session.getAttribute("kullaniciRol");
+                                                                // Diğer bilgileri de çekmek istiyorsanız aynı şekilde devam edebilirsiniz.
+
+                                                                // Bilgilerin kontrolü
+                                                                if (kullaniciDaireNo != null && kullaniciEmail != null) {
+                                                            %>
+                                                            <!-- Bilgiler varsa, bilgileri görüntüle -->
+                                                        <p>Kullanıcı Daire No: <%= kullaniciDaireNo%></p>
+                                                        <p>Kullanıcı Email: <%= kullaniciEmail%></p>
+                                                        <p>Telefon: <%= telefon%></p>
+                                                        <p>Ad Soyad: <%= fullname%></p>
+                                                        <p>Rol: <%= rol%></p>
+                                                        <%
+                                                        } else {
+                                                        %>
+                                                        <!-- Bilgiler yoksa, null yaz -->
+                                                        <p>Bilgiler bulunamadı.</p>
+                                                        <%
+                                                            }
+                                                        %>
+
+                                                        </p>
                                                         <ul>
                                                             <li><a href="#"><i class="icon-facebook2"></i></a></li>
                                                             <li><a href="#"><i class="icon-twitter2"></i></a></li>
@@ -110,8 +137,8 @@
                                                                         <h4 class="colorlib-heading">VİZYONUMUZ</h4>
                                                                         <p>Vizyonumuz, sitelerin günlük yönetim işlemlerini kolaylaştıran, iletişimi güçlendiren ve sakinlerle daha etkili etkileşim sağlayan bir platform sunmaktır.</p>
                                                                     </div>
-                                                                    
-                                                                     <div class="about-desc">
+
+                                                                    <div class="about-desc">
                                                                         <h4 class="colorlib-heading">MİSYONUMUZ</h4>
                                                                         <p>Misyonumuz, siteleri daha verimli ve sakin dostu hale getirerek sakinlere daha iyi bir yaşam kalitesi sunmaktır.</p>
                                                                     </div>
@@ -126,58 +153,101 @@
                                                 </div>
                                             </div>
 
-                                                <div id="colorlib-counter" class="colorlib-counters" data-stellar-background-ratio="0.5" style="background-image: url(images/34.jpg);">
-                                                    <div class="overlay"></div>
-                                                    <div class="colorlib-narrow-content">
-                                                        <div class="row">
+                                            <div id="colorlib-counter" class="colorlib-counters" data-stellar-background-ratio="0.5" style="background-image: url(images/34.jpg);">
+                                                <div class="overlay"></div>
+                                                <div class="colorlib-narrow-content">
+                                                    <div class="row">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-3 text-center animate-box">
+                                                            <span class="icon"><i class="flaticon-skyline"></i></span>
+                                                            <span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
+                                                            <span class="colorlib-counter-label">Toplam Villa Sayısı</span>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-3 text-center animate-box">
-                                                                <span class="icon"><i class="flaticon-skyline"></i></span>
-                                                                <span class="colorlib-counter js-counter" data-from="0" data-to="1539" data-speed="5000" data-refresh-interval="50"></span>
-                                                                <span class="colorlib-counter-label">Toplam Villa Sayısı</span>
-                                                            </div>
-                                                            <div class="col-md-3 text-center animate-box">
-                                                                <span class="icon"><i class="flaticon-engineer"></i></span>
-                                                                <span class="colorlib-counter js-counter" data-from="0" data-to="3653" data-speed="5000" data-refresh-interval="50"></span>
-                                                                <span class="colorlib-counter-label">Toplam Villa Sayısı</span>
-                                                            </div>
-                                                            <div class="col-md-3 text-center animate-box">
-                                                                <span class="icon"><i class="flaticon-architect-with-helmet"></i></span>
-                                                                <span class="colorlib-counter js-counter" data-from="0" data-to="5987" data-speed="5000" data-refresh-interval="50"></span>
-                                                                <span class="colorlib-counter-label">Dolu Villa Sayısı</span>
-                                                            </div>
-                                                            <div class="col-md-3 text-center animate-box">
-                                                                <span class="icon"><i class="flaticon-worker"></i></span>
-                                                                <span class="colorlib-counter js-counter" data-from="0" data-to="3999" data-speed="5000" data-refresh-interval="50"></span>
-                                                                <span class="colorlib-counter-label">Boş Villa Sayısı</span>
-                                                            </div>
+                                                        <div class="col-md-3 text-center animate-box">
+                                                            <span class="icon"><i class="flaticon-engineer"></i></span>
+                                                                <%
+                                                                    // Session'dan toplam villa sayısını çek
+                                                                    Integer toplamVillaSayisi = (Integer) session.getAttribute("toplamVillaSayisi");
+
+                                                                    // toplamVillaSayisi null kontrolü
+                                                                    if (toplamVillaSayisi != null) {
+                                                                %>
+                                                            <p style="color:white; font-size:26px"><b><%= toplamVillaSayisi%></b> </p>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                            <p>Toplam villa sayısı bulunamadı.</p>
+                                                            <%
+                                                                }
+                                                            %>
+
+                                                            <span class="colorlib-counter-label">Toplam Villa Sayısı</span>
+                                                        </div>
+                                                        <div class="col-md-3 text-center animate-box">
+                                                            <span class="icon"><i class="flaticon-architect-with-helmet"></i></span>
+                                                                <%
+                                                                    // Session'dan toplam villa sayısını çek
+                                                                    Integer doluvillasayisi = (Integer) session.getAttribute("doluVillaSayisi");
+
+                                                                    // toplamVillaSayisi null kontrolü
+                                                                    if (doluvillasayisi != null) {
+                                                                %>
+                                                            <p style="color:white; font-size:26px"><b><%= doluvillasayisi%></b> </p>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                            <p>Toplam villa sayısı bulunamadı.</p>
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <span class="colorlib-counter-label">Dolu Villa Sayısı</span>
+                                                        </div>
+                                                        <div class="col-md-3 text-center animate-box">
+                                                            <span class="icon"><i class="flaticon-worker"></i></span>
+                                                                <%
+                                                                    // Session'dan toplam villa sayısını çek
+                                                                    Integer bosvillasayisi = (Integer) session.getAttribute("bosVillaSayisi");
+
+                                                                    // toplamVillaSayisi null kontrolü
+                                                                    if (bosvillasayisi != null) {
+                                                                %>
+                                                            <p style="color:white; font-size:26px"><b><%= bosvillasayisi%></b> </p>
+                                                                    <%
+                                                                    } else {
+                                                                    %>
+                                                            <p>Toplam villa sayısı bulunamadı.</p>
+                                                            <%
+                                                                }
+                                                            %>
+                                                            <span class="colorlib-counter-label">Boş Villa Sayısı</span>
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
 
 
 
-                                                <!-- jQuery -->
-                                                <script src="js/jquery.min.js"></script>
-                                                <!-- jQuery Easing -->
-                                                <script src="js/jquery.easing.1.3.js"></script>
-                                                <!-- Bootstrap -->
-                                                <script src="js/bootstrap.min.js"></script>
-                                                <!-- Waypoints -->
-                                                <script src="js/jquery.waypoints.min.js"></script>
-                                                <!-- Flexslider -->
-                                                <script src="js/jquery.flexslider-min.js"></script>
-                                                <!-- Sticky Kit -->
-                                                <script src="js/sticky-kit.min.js"></script>
-                                                <!-- Owl carousel -->
-                                                <script src="js/owl.carousel.min.js"></script>
-                                                <!-- Counters -->
-                                                <script src="js/jquery.countTo.js"></script>
+                                            <!-- jQuery -->
+                                            <script src="js/jquery.min.js"></script>
+                                            <!-- jQuery Easing -->
+                                            <script src="js/jquery.easing.1.3.js"></script>
+                                            <!-- Bootstrap -->
+                                            <script src="js/bootstrap.min.js"></script>
+                                            <!-- Waypoints -->
+                                            <script src="js/jquery.waypoints.min.js"></script>
+                                            <!-- Flexslider -->
+                                            <script src="js/jquery.flexslider-min.js"></script>
+                                            <!-- Sticky Kit -->
+                                            <script src="js/sticky-kit.min.js"></script>
+                                            <!-- Owl carousel -->
+                                            <script src="js/owl.carousel.min.js"></script>
+                                            <!-- Counters -->
+                                            <script src="js/jquery.countTo.js"></script>
 
 
-                                                <!-- MAIN JS -->
-                                                <script src="js/main.js"></script>
+                                            <!-- MAIN JS -->
+                                            <script src="js/main.js"></script>
 
-                                                </body>
-                                                </html>
+                                            </body>
+                                            </html>

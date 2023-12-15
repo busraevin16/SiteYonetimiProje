@@ -302,17 +302,60 @@
             </div>
             <div class="col-md-3 text-center animate-box">
                 <span class="icon"><i class="flaticon-engineer"></i></span>
-                <span class="colorlib-counter js-counter" data-from="0" data-to="3653" data-speed="5000" data-refresh-interval="50"></span>
+                                    <%
+                        // Session'dan toplam villa sayısını çek
+                        Integer toplamVillaSayisi = (Integer) session.getAttribute("toplamVillaSayisi");
+
+                        // toplamVillaSayisi null kontrolü
+                        if (toplamVillaSayisi != null) {
+                    %>
+                                    <p style="color:white; font-size:26px"><b><%= toplamVillaSayisi %></b> </p>
+                    <%
+                        } else {
+                    %>
+                        <p>Toplam villa sayısı bulunamadı.</p>
+                    <%
+                        }
+                    %>
+
                 <span class="colorlib-counter-label">Toplam Villa Sayısı</span>
             </div>
             <div class="col-md-3 text-center animate-box">
                 <span class="icon"><i class="flaticon-architect-with-helmet"></i></span>
-                <span class="colorlib-counter js-counter" data-from="0" data-to="5987" data-speed="5000" data-refresh-interval="50"></span>
+                                 <%
+                        // Session'dan toplam villa sayısını çek
+                        Integer doluvillasayisi = (Integer) session.getAttribute("doluVillaSayisi");
+
+                        // toplamVillaSayisi null kontrolü
+                        if (doluvillasayisi != null) {
+                    %>
+                                    <p style="color:white; font-size:26px"><b><%= doluvillasayisi %></b> </p>
+                    <%
+                        } else {
+                    %>
+                        <p>Toplam villa sayısı bulunamadı.</p>
+                    <%
+                        }
+                    %>
                 <span class="colorlib-counter-label">Dolu Villa Sayısı</span>
             </div>
             <div class="col-md-3 text-center animate-box">
                 <span class="icon"><i class="flaticon-worker"></i></span>
-                <span class="colorlib-counter js-counter" data-from="0" data-to="3999" data-speed="5000" data-refresh-interval="50"></span>
+                 <%
+                        // Session'dan toplam villa sayısını çek
+                        Integer bosvillasayisi = (Integer) session.getAttribute("bosVillaSayisi");
+
+                        // toplamVillaSayisi null kontrolü
+                        if (bosvillasayisi != null) {
+                    %>
+                                    <p style="color:white; font-size:26px"><b><%= bosvillasayisi %></b> </p>
+                    <%
+                        } else {
+                    %>
+                        <p>Toplam villa sayısı bulunamadı.</p>
+                    <%
+                        }
+                    %>
                 <span class="colorlib-counter-label">Boş Villa Sayısı</span>
             </div>
         </div>

@@ -22,7 +22,10 @@ public class VeriCekVillalarServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Connection connection = null;
-
+        // Toplam villa sayısını tutacak değişken
+        int toplamVillaSayisi = 0;
+        int doluVillaSayisi = 0;
+        int bosVillaSayisi = 0;
         try {
             // Veritabanı bağlantısı
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -35,7 +38,7 @@ public class VeriCekVillalarServlet extends HttpServlet {
             List<String> villalar = new ArrayList<>();
 
             // Existing code to fetch villa information
-            String selectSql = "SELECT id, daireno, metrekare, KullaniciId, SonDuzenlenmeTarih, dolubos FROM villalar";
+            String selectSql = "SELECT id, daireno, metrekare, KullaniciId, SonDuzenlenmeTarih, dolubos,aidat,bahcemetrek FROM villalar";
             try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -64,11 +67,22 @@ public class VeriCekVillalarServlet extends HttpServlet {
                                     + ", Kullanıcı ID: " + kullaniciId
                                     + ", Dolu/Bos: " + (resultSet.getBoolean("dolubos") ? "Dolu" : "Boş")
                                     + ", Son Düzenlenme Tarihi: " + resultSet.getString("SonDuzenlenmeTarih")
+                                    + ", Aidat: " + resultSet.getString("aidat")           
+                                    + ", Bahcemk: " + resultSet.getString("bahcemetrek") 
                                     + ", Email: " + email
                                     + ", Fullname: " + fullname;
-
+                                    
+                                   
+                            if(resultSet.getBoolean("dolubos")== true){
+                                doluVillaSayisi++;
+                                
+                            }else{
+                                bosVillaSayisi++;
+                            }
                             // Add villaVerisi to the villalar list
                             villalar.add(villaVerisi);
+                            // Artır toplam villa sayısı
+                            toplamVillaSayisi++;
                         } else {
                             // Handle the case where there is no matching record in "bilgiler" table
                             System.err.println("Dikkat: " + kullaniciId + " kullanıcı ID'sine sahip bir bilgi bulunamadı.");
@@ -83,6 +97,11 @@ public class VeriCekVillalarServlet extends HttpServlet {
 
             // Villaları request objesine ekleyin
             request.setAttribute("villalar", villalar);
+            // Toplam villa sayısını session'a ekle
+            request.getSession().setAttribute("toplamVillaSayisi", toplamVillaSayisi);      
+            request.getSession().setAttribute("bosVillaSayisi", bosVillaSayisi);   
+            request.getSession().setAttribute("doluVillaSayisi", doluVillaSayisi);
+
 
             // Forward to the JSP page
             request.getRequestDispatcher("Villalar.jsp").forward(request, response);

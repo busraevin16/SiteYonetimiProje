@@ -23,7 +23,11 @@ public class VillaEkleServlet extends HttpServlet {
         String daireno = request.getParameter("daireno");
         String doluBosString = request.getParameter("DoluBos");
         String metrekare = request.getParameter("metrekare");
-        String tarih = request.getParameter("sonDuzenlenmeTarih");
+        String tarih = request.getParameter("sonDuzenlenmeTarih");    
+        String aidatt = request.getParameter("aidat");
+        String bahcem = request.getParameter("bahcem");
+
+
 
         // Kullanıcı ID'sini formdan al
         String kullaniciId = request.getParameter("KullaniciId");
@@ -41,14 +45,18 @@ public class VillaEkleServlet extends HttpServlet {
             // Tarih bilgisi varsa güncelleme işlemine devam et
             if (tarih != null && !tarih.isEmpty()) {
 
-                int dolubosdeger = Integer.parseInt(doluBosString);
-                String updateSql = "UPDATE villalar SET daireno = ?, dolubos = ?, metrekare = ?, KullaniciId = ? WHERE id = ?";
+                int dolubosdeger = Integer.parseInt(doluBosString);  
+                int aidatdeger = Integer.parseInt(aidatt);
+                int bm2 = Integer.parseInt(bahcem);
+                String updateSql = "UPDATE villalar SET daireno = ?, dolubos = ?, metrekare = ?, KullaniciId = ?,aidat = ? , bahcemetrek = ? WHERE id = ?";
                 try (PreparedStatement preparedStatement = connection.prepareStatement(updateSql)) {
                     preparedStatement.setString(1, daireno);
-                    preparedStatement.setInt(2, dolubosdeger);  // 1: true, 0: false
+                    preparedStatement.setInt(2, dolubosdeger);  // 1: true, 0: false                      
                     preparedStatement.setString(3, metrekare);
                     preparedStatement.setString(4, kullaniciId);
-                    preparedStatement.setString(5, id);
+                    preparedStatement.setInt(5, aidatdeger);  // 1: true, 0: false
+                    preparedStatement.setInt(6, bm2);  
+                    preparedStatement.setString(7, id);
 
                     int rowsAffected = preparedStatement.executeUpdate();
 
@@ -64,9 +72,11 @@ public class VillaEkleServlet extends HttpServlet {
 
             } else {
                 // Diğer işlemler
-                if (doluBosString != null && metrekare != null && !doluBosString.isEmpty()) {
+                if (doluBosString != null && metrekare != null && !doluBosString.isEmpty()&& bahcem != null) {
                     // Benzersiz "daireno" kontrolü ekleyin
                     int dolubosdeger = Integer.parseInt(doluBosString);
+                    int aidatti = Integer.parseInt(aidatt);
+                    int bahcem2 = Integer.parseInt(bahcem);
                     String uniqueCheckSql = "SELECT COUNT(*) FROM villalar WHERE daireno = ?";
                     try (PreparedStatement uniqueCheckStatement = connection.prepareStatement(uniqueCheckSql)) {
                         uniqueCheckStatement.setString(1, daireno);
@@ -78,12 +88,16 @@ public class VillaEkleServlet extends HttpServlet {
                             request.setAttribute("errorMessage", "Bu Villa Zaten Kayıtlı");
                         } else {
                             // Devam eden işlem: Benzersiz kontrol başarılı, ekleme işlemine devam et
-                            String insertSql = "INSERT INTO villalar (daireno, dolubos, metrekare, KullaniciId) VALUES (?, ?, ?, ?)";
+                            String insertSql = "INSERT INTO villalar (daireno, dolubos, metrekare, KullaniciId,aidat,bahcemetrek) VALUES (?,?, ?, ?,?, ?)";
                             try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)) {
                                 preparedStatement.setString(1, daireno);
                                  preparedStatement.setInt(2, dolubosdeger);
                                 preparedStatement.setString(3, metrekare);
-                                preparedStatement.setString(4, kullaniciId);
+                                preparedStatement.setString(4, kullaniciId);  
+                                preparedStatement.setInt(5, aidatti);
+                                preparedStatement.setInt(6, bahcem2);
+
+
 
                                 int rowsAffected = preparedStatement.executeUpdate();
 

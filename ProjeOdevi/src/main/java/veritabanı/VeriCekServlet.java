@@ -34,7 +34,7 @@ public class VeriCekServlet extends HttpServlet {
             List<String> villalar = new ArrayList<>();
 
             // Villaları çek
-            String selectSql = "SELECT id, daireno, metrekare, KullaniciId, SonDuzenlenmeTarih, dolubos FROM villalar";
+            String selectSql = "SELECT id, daireno, metrekare, KullaniciId, SonDuzenlenmeTarih, dolubos, aidat, bahcemetrek FROM villalar";
             try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)) {
                 ResultSet resultSet = preparedStatement.executeQuery();
 
@@ -45,6 +45,10 @@ public class VeriCekServlet extends HttpServlet {
                     String kullanicid = resultSet.getString("KullaniciId");
                     String sonDuzenlenmeTarih = resultSet.getString("SonDuzenlenmeTarih");
                     boolean doluBos = resultSet.getBoolean("dolubos");
+                    String aidat = resultSet.getString("aidat");
+                    String bahcemetre = resultSet.getString("bahcemetrek");
+
+
                     if (daireno == null) {
                         // Eğer daireno null ise, hatayı konsola yazdır ve devam etme
                         System.err.println("Dikkat: " + id + " numaralı villanın daireno değeri null.");
@@ -53,7 +57,7 @@ public class VeriCekServlet extends HttpServlet {
                     // Villayı bilgilerini oluştur
                     String villaVerisi = "ID: " + id + ", " + daireno + ", Metrekare: " + metrekare
                             + ", Kullanıcı ID: " + kullanicid + ", Dolu/Bos: " + (doluBos ? "Dolu" : "Boş")
-                            + ", Son Düzenlenme Tarihi: " + sonDuzenlenmeTarih;
+                            + ", Son Düzenlenme Tarihi: " + sonDuzenlenmeTarih + ", Aidat: " + aidat+ ", Bahce: " + bahcemetre;
 
                     villalar.add(villaVerisi);
                 }
