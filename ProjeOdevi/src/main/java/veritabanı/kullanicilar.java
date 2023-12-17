@@ -14,6 +14,7 @@ public class kullanicilar {
     int daireno;
     String email;
     String sifree;
+    String fullname;
 
     public int getid_bilgi() {
         return id_bilgi;
@@ -43,8 +44,11 @@ public class kullanicilar {
         return sifree;
     }
 
-    public void setsifree(String sifree) {
-        this.sifree = sifree;
+    public void setfullname(String fullname) {
+        this.fullname = fullname;
+    }
+     public String getfullname() {
+        return fullname;
     }
 
 }

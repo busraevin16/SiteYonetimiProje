@@ -5,7 +5,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;  // Eklenen satır
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +20,7 @@ public class GirisServlet extends HttpServlet {
         // Formdan alınan bilgileri al
         String dairenoString = request.getParameter("daireno");
         String email = request.getParameter("email");
-        String sifre = request.getParameter("password");  // Değiştirilen satır: sifree -> sifre
+        String sifre = request.getParameter("password");  
 
         // Gelen bilgilerin null kontrolü
         if (dairenoString == null || email == null || sifre == null) {
@@ -66,19 +66,49 @@ public class GirisServlet extends HttpServlet {
                 String telefon = resultSet.getString("telefon");
                 String fullname = resultSet.getString("fullname");
                 String rol = resultSet.getString("rol");
+                int idBilgi = resultSet.getInt("id_bilgi");
 
                 // Session'a diğer bilgileri ekle
                 request.getSession().setAttribute("kullaniciTelefon", telefon);
                 request.getSession().setAttribute("kullaniciFullname", fullname);
                 request.getSession().setAttribute("kullaniciRol", rol);
+                request.getSession().setAttribute("kullaniciIdBilgi", idBilgi);
 
                 // Session süresini 1 saat (60 dakika * 60 saniye) olarak ayarla
                 request.getSession().setMaxInactiveInterval(60 * 60);
 
-                // Başarılı giriş durumunda yönlendirilecek sayfaya bilgi gönder
-                request.setAttribute("mesaj", "Başarılı giriş!");
-                request.getRequestDispatcher("AnaSayfa.jsp").forward(request, response);
-                System.out.println("Başarılı giriş!"); // Konsola mesaj yazdır
+                // Aidat fiyatını çekmek için SQL sorgusunu hazırla
+                String aidatSql = "SELECT * FROM villalar WHERE KullaniciId = ?";
+                try (PreparedStatement aidatStatement = connection.prepareStatement(aidatSql)) {
+                    aidatStatement.setInt(1, idBilgi);
+
+                    // Aidat sorgusunu çalıştır ve sonucu al
+                    ResultSet aidatResultSet = aidatStatement.executeQuery();
+
+                    if (aidatResultSet.next()) {
+                        // Aidat bilgisini çek
+                        int aidatFiyati = aidatResultSet.getInt("aidat");
+                        int metrekare = aidatResultSet.getInt("metrekare");
+
+                        // Session'a aidat bilgisini ekle
+                        request.getSession().setAttribute("kullaniciAidatFiyati", aidatFiyati);  
+                        request.getSession().setAttribute("kullanicimetrekare", metrekare);
+
+                        // ... (diğer işlemler)
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace(); // Hata durumunda konsola hata mesajını yazdır
+                }
+
+                // Kullanıcının rolüne bağlı olarak yönlendirme yap
+                if ("Admin".equals(rol)) {
+                    // Admin olarak giriş yaptıysa AdminPaneli.jsp sayfasına yönlendir
+                    response.sendRedirect("AdminPaneli.jsp");
+                } else {
+                    // Diğer kullanıcılar için AnaSayfa.jsp sayfasına yönlendir
+                    response.sendRedirect("AnaSayfa.jsp");
+                }
+
             } else {
                 // Başarısız giriş durumunda mesaj ekleyerek yönlendirilecek sayfaya bilgi gönder
                 request.setAttribute("mesaj", "Başarısız giriş! Lütfen bilgilerinizi kontrol edin.");
@@ -112,5 +142,4 @@ public class GirisServlet extends HttpServlet {
             }
         }
     }
-
 }

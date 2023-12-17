@@ -76,10 +76,13 @@
                                                                 Integer kullaniciDaireNo = (Integer) session.getAttribute("kullaniciDaireNo");
                                                                 String kullaniciEmail = (String) session.getAttribute("kullaniciEmail");
                                                                 String telefon = (String) session.getAttribute("kullaniciTelefon");
-                                                                String isim = (String) session.getAttribute("kullaniciFullname");
+                                                                String fullnameee = (String) session.getAttribute("kullaniciFullname");
                                                                 String rol = (String) session.getAttribute("kullaniciRol");
+                                                                Integer aidatttt = (Integer) session.getAttribute("kullaniciAidatFiyati");
+                                                                Integer kullanicimetre2 = (Integer) session.getAttribute("kullanicimetrekare");
+                                                                 double aidatim = (kullanicimetre2 * aidatttt) / 12;
+                                                                
                                                                 // Diğer bilgileri de çekmek istiyorsanız aynı şekilde devam edebilirsiniz.
-
                                                                 // Bilgilerin kontrolü
                                                                 if (kullaniciDaireNo != null && kullaniciEmail != null) {
                                                             %>
@@ -87,8 +90,10 @@
                                                         <p>Kullanıcı Daire No: <%= kullaniciDaireNo%></p>
                                                         <p>Kullanıcı Email: <%= kullaniciEmail%></p>
                                                         <p>Telefon: <%= telefon%></p>
-                                                        <p>Ad Soyad: <%= isim%></p>
-                                                        <p>Rol: <%= rol%></p>
+                                                        <p>Ad Soyad: <%= fullnameee%></p>
+                                                        <p>Aylık Aidat: <%= aidatim%>  TL</p>
+
+
                                                         <%
                                                         } else {
                                                         %>
@@ -133,7 +138,7 @@
                                                                             String kullanicid = villaBilgileri[3].substring(14);
                                                                             String doluBos = villaBilgileri[4].substring(10);
                                                                             String sonDuzenlenmeTarih = villaBilgileri[5].substring(19);
-                                                                            String aidatimiz = villaBilgileri[6].substring(6).trim();                                                                  
+                                                                            String aidatimiz = villaBilgileri[6].substring(6).trim();
                                                                             String bahcemetrekare = villaBilgileri[7].substring(8).trim(); // İndeks 6 (sıfır tabanlı)
                                                                             String email = villaBilgileri[8].substring(8).trim();
                                                                             String fullname = villaBilgileri[9].substring(10).trim();
@@ -144,7 +149,7 @@
                                                                                 double aidat = (mkare * m2fiyat) / 12;
 
 // Geri kalan HTML kodları buraya eklenecek
-%>
+                                                                %>
                                                                 <div class="col-md-6 animate-box" data-animate-effect="fadeInLeft" id="<%= id%>">
                                                                     <div class="project" style="background-image: url(images/img-1.jpg);">
                                                                         <div class="desc">
@@ -155,8 +160,8 @@
                                                                                 <p class="icon">
                                                                                     <span><a href="#">Dolu & Bos: <%= doluBos%></a></span>
                                                                                     <span><a href="#"><i class="icon-eye"></i>Metrekare: <%= metrekare%></a></span>
-                                                                                    <span><a href="#"><i class="icon-eye"></i>Aidat: <%= aidat%> TL</a></span>
-                                                                                     <span><a href="#"><i class="icon-eye"></i>Bahçe M2: <%= bahcemetrekare%></a></span></br></br>
+                                                                                   
+                                                                                    <span><a href="#"><i class="icon-eye"></i>Bahçe M2: <%= bahcemetrekare%></a></span></br></br>
                                                                                     <span><a href="#"><i class="icon-heart"></i>Son Düzenlenme Tarihi: <%= sonDuzenlenmeTarih%></a></span>
                                                                                 </p>
                                                                             </div>
@@ -174,20 +179,6 @@
                                                                 <%
                                                                     }
                                                                 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                                                             </div>
                                                             <div class="row">

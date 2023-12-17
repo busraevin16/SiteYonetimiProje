@@ -65,15 +65,18 @@
                                                     <div class="colorlib-footer">
                                                         <p>
 
-                                                            <%
+                                                               <%
                                                                 // Kullanıcı bilgilerini session'dan çek
                                                                 Integer kullaniciDaireNo = (Integer) session.getAttribute("kullaniciDaireNo");
                                                                 String kullaniciEmail = (String) session.getAttribute("kullaniciEmail");
                                                                 String telefon = (String) session.getAttribute("kullaniciTelefon");
-                                                                String fullname = (String) session.getAttribute("kullaniciFullname");
+                                                                String fullnameee = (String) session.getAttribute("kullaniciFullname");
                                                                 String rol = (String) session.getAttribute("kullaniciRol");
+                                                                Integer aidatttt = (Integer) session.getAttribute("kullaniciAidatFiyati");
+                                                                Integer kullanicimetre2 = (Integer) session.getAttribute("kullanicimetrekare");
+                                                                 double aidatim = (kullanicimetre2 * aidatttt) / 12;
+                                                                
                                                                 // Diğer bilgileri de çekmek istiyorsanız aynı şekilde devam edebilirsiniz.
-
                                                                 // Bilgilerin kontrolü
                                                                 if (kullaniciDaireNo != null && kullaniciEmail != null) {
                                                             %>
@@ -81,8 +84,10 @@
                                                         <p>Kullanıcı Daire No: <%= kullaniciDaireNo%></p>
                                                         <p>Kullanıcı Email: <%= kullaniciEmail%></p>
                                                         <p>Telefon: <%= telefon%></p>
-                                                        <p>Ad Soyad: <%= fullname%></p>
-                                                        <p>Rol: <%= rol%></p>
+                                                        <p>Ad Soyad: <%= fullnameee%></p>
+                                                        <p>Aylık Aidat: <%= aidatim%>  TL</p>
+
+
                                                         <%
                                                         } else {
                                                         %>
@@ -91,7 +96,6 @@
                                                         <%
                                                             }
                                                         %>
-
                                                         </p>
                                                         <ul>
                                                             <li><a href="#"><i class="icon-facebook2"></i></a></li>

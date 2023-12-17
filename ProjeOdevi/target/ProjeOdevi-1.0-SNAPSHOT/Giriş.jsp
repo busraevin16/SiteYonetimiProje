@@ -268,42 +268,25 @@
 
 <body>
     <div class="container" id="container">
-        <div class="form-container sign-up-container">
-            <!-- Giriş Formu -->
-            <form action="GirisServlet" method="post">
-                <h1> SİTE SAKİNİ GİRİŞİ </h1>
-                <input type="text" placeholder="Villa No" name="daireno" />
-                <input type="email" placeholder="Email" name="email" />
-                <input type="password" placeholder="Şifre" name="password"/>
-                <a href="#">Şifreni mi unuttun?</a>
-                <button type="submit">Giriş</button>
-            </form>
-        </div>
+        
         <h1>${mesaj}</h1> <!-- mesajı göster -->
             
         <div class="form-container sign-in-container">
             <!-- Giriş Formu -->
          <form action="veritabanı.GirisServlet" method="post">
-                <h1> YÖNETİCİ GİRİŞİ </h1>
+                <h1> Giriş Sayfası </h1>
                 <input type="text" placeholder="Villa No" name="daireno" />
                 <input type="email" placeholder="Email" name="email" />
                 <input type="password" placeholder="Şifre" name="password"/>
-                <a href="#">Şifreni mi unuttun?</a>
-                <button type="submit">Giriş</button>
+                
+                <button type="submit">GİRİŞ</button>
             </form>
         </div>
 
         <div class="overlay-container">
             <div class="overlay">
-                <div class="overlay-panel overlay-left">
-                    <h1>AKANA SİTE YÖNETİM SAYFASINA HOŞ GELDİNİZ!</h1>
-                    <br>
-                    <button class="ghost" id="signIn">YÖNETİCİ GİRİŞİ</button>
-                </div>
                 <div class="overlay-panel overlay-right">
-                    <h1>AKANA SİTE YÖNETİM SAYFASINA HOŞ GELDİNİZ!</h1>
-                    <br>
-                    <button class="ghost" id="signUp">SİTE SAKİNİ GİRİŞİ</button>
+                    <h1>DUMAN SİTE YÖNETİM SAYFASINA HOŞ GELDİNİZ!</h1>
                 </div>
             </div>
         </div>
